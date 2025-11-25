@@ -27,9 +27,6 @@ const FormFields = <T extends FieldValues> ({control, name, label, placeholder, 
               <FormControl>
                 <Input className="input" placeholder={placeholder}  type={type} {...field} />
               </FormControl>
-              <FormDescription>
-                This is your public display name.
-              </FormDescription>
               <FormMessage />
             </FormItem>
         )}
