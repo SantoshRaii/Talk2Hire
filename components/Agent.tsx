@@ -66,9 +66,7 @@ const Agent = ({userName,userId, type,interviewId,questions}:AgentProps) => {
       interviewId: interviewId!,
       userId: userId!,
       transcript: messagaes,
-    })
-
-    //TODO 
+    });
     if(success && id){
       router.push(`/interview/${interviewId}/feedback`);
     }else{
