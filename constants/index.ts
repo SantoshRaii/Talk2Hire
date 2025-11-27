@@ -1,4 +1,5 @@
 import { CreateAssistantDTO } from "@vapi-ai/web/dist/api";
+import { redirect } from "next/navigation";
 import { z } from "zod";
 
 export const mappings = {

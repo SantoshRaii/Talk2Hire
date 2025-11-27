@@ -4,7 +4,7 @@ import { db,auth } from "@/firebase/admin";
 import { cookies } from "next/headers";
 import { success } from "zod";
 
-const ONE_WEEK = 60 * 60 * 24 * 7;
+const ONE_WEEK = 60 * 60 * 24 * 7; // one week in seconds
 
 export async function signUp(params: SignUpParams){
   const { uid, name, email,password} = params;
@@ -87,7 +87,7 @@ export async function getCurrentUser(): Promise<User | null>{
     if(!sessionCookie) return null;
         
     try {
-        const decodedClaims = await auth.verifySessionCookie(sessionCookie,true);
+        const decodedClaims = await auth.verifySessionCookie(sessionCookie,true);  // checks decoded.uid === logged in user's uid
 
         const userRecord = await db.collection('users').doc(decodedClaims.uid).get();
 
@@ -108,6 +108,18 @@ export async function isAuthenticated(){
 
     return !!user; // to convert truthy and falsy value to boolean 
 
+}
+
+export async function signOut() {
+  const cookieStore = await cookies();
+
+  // Clear the session cookie by setting maxAge to 0
+  cookieStore.set('session', '', {
+    maxAge: 0,
+    path: '/',
+  });
+
+  return { success: true };
 }
 
 
